@@ -1,6 +1,14 @@
-.vs/*
+.vs/
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+/Dojo/DojoTests/obj
+/Dojo/.vscode
+/CodingDojoKatas/.vscode
+/CodingDojoKatas/CodingDojoKatas/RomanLiteralsTests/bin/Debug/net5.0
+/CodingDojoKatas/CodingDojoKatas/RomanLiteralsTests/obj
+/CodingDojoKatas/CodingDojoKatas/RomanLiteras/bin/Debug
+/CodingDojoKatas/CodingDojoKatas/RomanLiteras/obj
+*.suo
