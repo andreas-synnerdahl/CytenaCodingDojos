@@ -12,3 +12,7 @@
 /CodingDojoKatas/CodingDojoKatas/RomanLiteras/bin/Debug
 /CodingDojoKatas/CodingDojoKatas/RomanLiteras/obj
 *.suo
+/CodingDojoKatas/FizzBuzz/bin/Debug
+/CodingDojoKatas/FizzBuzz/obj
+/CodingDojoKatas/FizzBuzzTests/bin/Debug/net48
+/CodingDojoKatas/FizzBuzzTests/obj

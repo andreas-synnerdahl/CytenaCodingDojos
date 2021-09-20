@@ -1,10 +1,7 @@
-﻿
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace RomanLiterals
 {
-
     public class RomanLiteralsParser
     {
         private int _currentValue;
