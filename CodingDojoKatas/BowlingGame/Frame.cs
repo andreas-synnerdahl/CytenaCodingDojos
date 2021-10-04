@@ -4,7 +4,5 @@
     {
          public string throw1 = "";
          public string throw2 = "";
-
-
     }
 }

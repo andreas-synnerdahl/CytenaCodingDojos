@@ -1,6 +1,10 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/Highlighting/HighlightingSourceSnapshotLocation/@EntryValue">C:\Users\hinrich.aue\AppData\Local\Temp\JetBrains\ReSharperPlatformVs16\vAny_c9a70440\CoverageData\_CodingDojoKatas.-1735298693\Snapshot\snapshot.utdcvr</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=e93278c2_002Dcfc4_002D4c9c_002Da51c_002D08a97eed01ec/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="ParseRomanLiteral_Digits_ParsedCorrectly" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;NUnit3x::B3055970-AB5E-4F7B-B29A-7C7C44B06137::net5.0::RomanLiteralsTests.RomanLiteralsParserTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::40004AA2-01AB-4856-8251-9478C4FDF3DC::.NETFramework,Version=v4.8::FizzBuzzTests.FizzBuzzTests.METHOD&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::BB62114B-B7C9-4162-A3C0-0B66542A9590::.NETFramework,Version=v4.8::BowlingGameTests.ScoreCalculatorTests.ThadaThrow&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::BB62114B-B7C9-4162-A3C0-0B66542A9590::.NETFramework,Version=v4.8::BowlingGameTests.ScoreCalculatorTests.BadBowler&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
