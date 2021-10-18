@@ -61,10 +61,16 @@ namespace BowlingGameTests
                     }
                 }).Returns(10 + 3 + 3 + 5).SetDescription("Spare With Bonus");
                 yield return new TestCaseData(
-                    Enumerable.Repeat("X", 12).Select(strike => new Frame
+                    Enumerable.Repeat("X", 9)
+                    .Select(strike => new Frame
                     {
                         throw1 = strike,
-                    }).ToList()
+                    }).Concat(new [] {new LastFrame
+                        {
+                             throw1 = "X",
+                             throw2 = "X",
+                             throw3 = "X"
+                        }}).ToList()
                 ).Returns(300).SetDescription("All strikes - Perfect 300");
             }
         }
@@ -73,6 +79,40 @@ namespace BowlingGameTests
         public int Calculate(IList<Frame> frames)
         {
             return ScoreCalculator.Calculate(frames);
+        }
+
+        [TestCase("1", "-", ExpectedResult = 1)]
+        [TestCase("1", "1", ExpectedResult = 2)]
+        [TestCase("3", "/", ExpectedResult = 10)]
+        [TestCase("X", "", ExpectedResult = 10)]
+        public int CalculateFrameScore(string throw1, string throw2)
+        {
+            var frame = new Frame
+            {
+                throw1 = throw1,
+                throw2 = throw2,
+            };
+
+            return frame.CalculateScore();
+        }
+
+        [TestCase("1", "-", "", ExpectedResult = 1)]
+        [TestCase("1", "1", "", ExpectedResult = 2)]
+        [TestCase("3", "/", "-", ExpectedResult = 10)]
+        [TestCase("3", "/", "5", ExpectedResult = 15)]
+        [TestCase("X", "-", "-", ExpectedResult = 10)]
+        [TestCase("X", "X", "-", ExpectedResult = 20)]
+        //[TestCase("X", "X", "X", ExpectedResult = 30)]
+        public int CalculateLAstFrameScore(string throw1, string throw2, string throw3)
+        {
+            var frame = new LastFrame
+            {
+                throw1 = throw1,
+                throw2 = throw2,
+                throw3 = throw3,
+            };
+
+            return frame.CalculateScore();
         }
     }
 }
