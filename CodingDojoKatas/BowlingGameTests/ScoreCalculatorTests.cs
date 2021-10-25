@@ -59,7 +59,7 @@ namespace BowlingGameTests
                         throw1 = "3",
                         throw2 = "5"
                     }
-                }).Returns(10 + 3 + 3 + 5).SetDescription("Spare With Bonus");
+                }).Returns(10 + 3 + 3 + 5).SetName("Spare With Bonus");
                 yield return new TestCaseData(
                     Enumerable.Repeat("X", 9)
                     .Select(strike => new Frame
@@ -71,7 +71,7 @@ namespace BowlingGameTests
                              throw2 = "X",
                              throw3 = "X"
                         }}).ToList()
-                ).Returns(300).SetDescription("All strikes - Perfect 300");
+                ).Returns(300).SetName("All strikes - Perfect 300");
             }
         }
 
@@ -102,7 +102,7 @@ namespace BowlingGameTests
         [TestCase("3", "/", "5", ExpectedResult = 15)]
         [TestCase("X", "-", "-", ExpectedResult = 10)]
         [TestCase("X", "X", "-", ExpectedResult = 20)]
-        //[TestCase("X", "X", "X", ExpectedResult = 30)]
+        [TestCase("X", "X", "X", ExpectedResult = 30)]
         public int CalculateLAstFrameScore(string throw1, string throw2, string throw3)
         {
             var frame = new LastFrame

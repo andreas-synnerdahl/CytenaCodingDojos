@@ -6,5 +6,6 @@
     &lt;TestId&gt;NUnit3x::40004AA2-01AB-4856-8251-9478C4FDF3DC::.NETFramework,Version=v4.8::FizzBuzzTests.FizzBuzzTests.METHOD&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::BB62114B-B7C9-4162-A3C0-0B66542A9590::.NETFramework,Version=v4.8::BowlingGameTests.ScoreCalculatorTests.ThadaThrow&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::BB62114B-B7C9-4162-A3C0-0B66542A9590::.NETFramework,Version=v4.8::BowlingGameTests.ScoreCalculatorTests.BadBowler&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::BB62114B-B7C9-4162-A3C0-0B66542A9590::.NETFramework,Version=v4.8::BowlingGameTests.ScoreCalculatorTests&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

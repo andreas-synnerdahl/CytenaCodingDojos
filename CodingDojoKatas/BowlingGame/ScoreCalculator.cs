@@ -30,21 +30,27 @@ namespace BowlingGame
 
         public static int CalculateFrameScore(Frame frame, Frame nextFrame, Frame nextNextFrame)
         {
-            if (frame.throw1 == "X")
-            {
-                return 10 + CalculateFrameScore(nextFrame, nextNextFrame, new Frame()) + CalculateFrameScore(nextNextFrame, new Frame(), new Frame());
-            }
-            else if (frame.throw2 == "/")
-            {
-                return 10 + CalculateFrameScore(nextFrame, nextNextFrame, new Frame());
-            }
-            else
-            {
-                var scoreThrow1 = GetScoreFromThrow(frame.throw1);
-                var scoreThrow2 = GetScoreFromThrow(frame.throw2);
+            var frames = new []{frame, nextFrame, nextNextFrame};
+            var throws = frames
+                .SelectMany(f => f.GetUsedThrows())
+                .ToList();
 
-                return Math.Min(scoreThrow1 + scoreThrow2, 10);
-            }            
+            var score = 0;
+            for (var i = 0; i < throws.Count; i++)
+            {
+                var remaing = throws.Skip(i);
+                var current = remaing.First();
+
+                var currentThrow = remaing.Take(2);
+                if (current == "X" )
+                    currentThrow = remaing.Take(3); 
+                else if (current == "/" )
+                    currentThrow = remaing.Take(1); 
+
+                score = currentThrow.Sum(GetScoreFromThrow);
+            }
+
+            return score;
         }
 
         private static int GetScoreFromThrow(string theThrow)
