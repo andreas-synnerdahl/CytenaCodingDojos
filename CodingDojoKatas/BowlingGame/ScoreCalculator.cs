@@ -6,51 +6,64 @@ namespace BowlingGame
 {
     // https://codingdojo.org/kata/Bowling/
 
-    public class ScoreCalculator
+    public static class ScoreCalculator
     {
         public static int Calculate(IList<Frame> frames)
         {
-            var nextFrame = new Frame();
-            var nextNextFrame = new Frame();
-
             var totalScore = 0;
+
+            var nextFrame = Frame.Empty;
+            var nextNextFrame = Frame.Empty;
 
             foreach (var frame in frames.Reverse())
             {
-                var score = CalculateFrameScore(frame, nextFrame, nextNextFrame);
+                var score = CalculateScore(frame, nextFrame, nextNextFrame);
 
                 nextNextFrame = nextFrame;
                 nextFrame = frame;
 
                 totalScore += score;
             }
-            
+
             return totalScore;
         }
 
-        public static int CalculateFrameScore(Frame frame, Frame nextFrame, Frame nextNextFrame)
+        public static int CalculateScore(Frame frame, Frame nextFrame, Frame nextNextFrame)
         {
-            var frames = new []{frame, nextFrame, nextNextFrame};
-            var throws = frames
-                .SelectMany(f => f.GetUsedThrows())
-                .ToList();
+            var throws = GetThrows(frame, nextFrame, nextNextFrame);
 
-            var score = 0;
-            for (var i = 0; i < throws.Count; i++)
+            if (frame.throw1 == "X")
             {
-                var remaing = throws.Skip(i);
-                var current = remaing.First();
-
-                var currentThrow = remaing.Take(2);
-                if (current == "X" )
-                    currentThrow = remaing.Take(3); 
-                else if (current == "/" )
-                    currentThrow = remaing.Take(1); 
-
-                score = currentThrow.Sum(GetScoreFromThrow);
+                return throws
+                    .Take(3)
+                    .Sum(GetScoreFromThrow);
             }
+            else if (frame.throw2== "/")
+            {
+                return throws
+                    .Skip(1)
+                    .Take(2)
+                    .Sum(GetScoreFromThrow);
+            }
+            else
+            {
+                return throws
+                    .Take(2)
+                    .Sum(GetScoreFromThrow);
+            }
+        }
 
-            return score;
+        private static IEnumerable<string> GetThrows(params Frame[] frames) => frames
+            .SelectMany(GetThrows);
+
+        private static IEnumerable<string> GetThrows(Frame frame)
+        {
+            yield return frame.throw1;
+
+            if (frame.throw1 != "X")
+            {
+                yield return frame.throw2;
+            }
         }
 
         private static int GetScoreFromThrow(string theThrow)
@@ -61,6 +74,7 @@ namespace BowlingGame
                 "X" => 10,
                 "-" => 0,
                 "/" => 10,
+                null => 0,
                 _ => int.Parse(theThrow),
             };
         }

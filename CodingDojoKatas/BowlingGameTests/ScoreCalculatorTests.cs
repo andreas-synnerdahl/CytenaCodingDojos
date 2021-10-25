@@ -81,38 +81,17 @@ namespace BowlingGameTests
             return ScoreCalculator.Calculate(frames);
         }
 
-        [TestCase("1", "-", ExpectedResult = 1)]
-        [TestCase("1", "1", ExpectedResult = 2)]
-        [TestCase("3", "/", ExpectedResult = 10)]
-        [TestCase("X", "", ExpectedResult = 10)]
-        public int CalculateFrameScore(string throw1, string throw2)
-        {
-            var frame = new Frame
-            {
-                throw1 = throw1,
-                throw2 = throw2,
-            };
-
-            return frame.CalculateScore();
-        }
-
         [TestCase("1", "-", "", ExpectedResult = 1)]
         [TestCase("1", "1", "", ExpectedResult = 2)]
-        [TestCase("3", "/", "-", ExpectedResult = 10)]
+        [TestCase("3", "/", "", ExpectedResult = 10)]
+        [TestCase("X", "", "", ExpectedResult = 10)]
         [TestCase("3", "/", "5", ExpectedResult = 15)]
         [TestCase("X", "-", "-", ExpectedResult = 10)]
         [TestCase("X", "X", "-", ExpectedResult = 20)]
         [TestCase("X", "X", "X", ExpectedResult = 30)]
-        public int CalculateLAstFrameScore(string throw1, string throw2, string throw3)
+        public int CalculateFrameScore(string throw1, string throw2, string throw3)
         {
-            var frame = new LastFrame
-            {
-                throw1 = throw1,
-                throw2 = throw2,
-                throw3 = throw3,
-            };
-
-            return frame.CalculateScore();
+            return ScoreCalculator.CalculateScore(throw1, throw2, throw3);
         }
     }
 }
