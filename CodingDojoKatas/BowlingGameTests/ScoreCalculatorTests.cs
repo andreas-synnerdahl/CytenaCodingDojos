@@ -46,7 +46,7 @@ namespace BowlingGameTests
                         throw1 = "8",
                         throw2 = "1"
                     }
-                }).Returns(9).SetName("NormalThrow");
+                }).Returns(8 + 1).SetName("NormalThrow");
                 yield return new TestCaseData(new List<Frame>
                 {
                     new Frame
@@ -79,6 +79,38 @@ namespace BowlingGameTests
         public int Calculate(IList<Frame> frames)
         {
             return ScoreCalculator.Calculate(frames);
+        }
+
+        [TestCase('4', '-', ExpectedResult = 2)]
+        [TestCase('4', '4', ExpectedResult = 2)]
+        [TestCase('4', '/', ExpectedResult = 3)]
+        [TestCase('X', ' ', ExpectedResult = 3)]
+        [TestCase('X', 'X', ExpectedResult = 3)]
+        public int GetScoreWidth(char throw1, char throw2)
+        {
+            return ScoreCalculator.GetScoreWidth(throw1, throw2);
+        }
+
+        [TestCase('-', ExpectedResult = 2)]
+        [TestCase('4', ExpectedResult = 2)]
+        [TestCase('X', ExpectedResult = 1)]
+        public int GetFrameWidth(char throw1)
+        {
+            return ScoreCalculator.GetFrameWidth(throw1);
+        }
+
+        //          1 2 3 4 5 6 7 8 9 10
+        [TestCase("                     ", ExpectedResult = 0)]
+        [TestCase("4-                   ", ExpectedResult = 4)]
+        [TestCase("--                   ", ExpectedResult = 0)]
+        [TestCase("81                   ", ExpectedResult = (8 + 1))]
+        [TestCase("X                    ", ExpectedResult = 10)]
+        [TestCase("X 41                 ", ExpectedResult = (10 + 4 + 1) + (4 + 1))]
+        [TestCase("5/35                 ", ExpectedResult = (5 + 5 + 3) + (3 + 5))]
+        [TestCase("X X X X X X X X X XXX", ExpectedResult = 300)]
+        public int Calculate(string throws)
+        {
+            return ScoreCalculator.Calculate(throws);
         }
 
         [TestCase("1", "-", ExpectedResult = 1)]
