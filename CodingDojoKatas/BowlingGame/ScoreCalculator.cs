@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 
 namespace BowlingGame
 {
@@ -8,6 +9,29 @@ namespace BowlingGame
 
     public class ScoreCalculator
     {
+        public static int Calculate(string throws)
+        {
+            var throwsWithoutSpaces = throws.Where(t => t != ' ').ToArray();
+
+            var score = 0;
+
+            var throwIndex = 0;
+            while (throwIndex <= throwsWithoutSpaces.Length - 1)
+            {
+                var currentThrow = throwsWithoutSpaces[throwIndex];
+                var nextThrow = throwsWithoutSpaces[throwIndex + 1];
+                //var nextNextThrow = throws[throwIndex + 2];
+
+                var width = GetScoreWidth(currentThrow, nextThrow);
+                var x = new ArraySegment<char>(throwsWithoutSpaces, currentThrow, width).Sum(GetScoreFromThrow);
+
+                var frameWidth = GetFrameWidth(currentThrow);
+                throwIndex += frameWidth;
+            }
+
+            return score;
+        }
+
         public static int Calculate(IList<Frame> frames)
         {
             var nextFrame = new Frame();
@@ -63,6 +87,34 @@ namespace BowlingGame
                 "/" => 10,
                 _ => int.Parse(theThrow),
             };
+        }
+
+        private static int GetScoreFromThrow(char theThrow)
+        {
+            return theThrow switch
+            {
+                ' ' => 0,
+                'X' => 10,
+                '-' => 0,
+                '/' => 10,
+                _ => int.Parse(theThrow.ToString()),
+            };
+        }
+
+        public static int GetScoreWidth(char throw1, char throw2)
+        {
+            if (throw1 == 'X')
+                return 3;
+            if (throw2 == '/')
+                return 3;
+            return 2;
+        }
+
+        public static int GetFrameWidth(char throw1)
+        {
+            if (throw1 == 'X')
+                return 1;
+            return 2;
         }
     }
 }
