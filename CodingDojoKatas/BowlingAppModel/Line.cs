@@ -5,22 +5,30 @@ using System.Linq;
 
 namespace BowlingAppModel
 {
-    public class Line : IEnumerable<Frame>
+    public class Line : IEnumerable<Throw>
     {
-        private readonly Frame[] _frames;
+        private readonly Dictionary<int,Throw> _throws;
 
         public Line()
         {
-            _frames = Enumerable.Repeat(0, 10).Select(_ => new Frame()).ToArray();
+            _throws = new Dictionary<int, Throw>();
         }
 
-        public Frame this[int index]
+        public int Count => _throws.Count;
+
+        public Throw this[int index]
         {
-            get => _frames[index];
+            get
+            {
+                if (_throws.TryGetValue(index, out var value))
+                    return value;
+                return Throw.Miss;
+            }
+            set => _throws[index] = value;
         }
 
-        public IEnumerator<Frame> GetEnumerator() =>
-            ((IEnumerable<Frame>)_frames).GetEnumerator();
+        public IEnumerator<Throw> GetEnumerator() =>
+            _throws.Values.GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator() =>
             GetEnumerator();
