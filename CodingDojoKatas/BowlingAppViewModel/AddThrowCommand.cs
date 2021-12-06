@@ -4,23 +4,30 @@ using BowlingAppModel;
 
 namespace BowlingAppViewModel
 {
-    public class AdOneCommand : ICommand
+    public class AddThrowCommand : ICommand
     {
         private readonly Line line;
 
-        public AdOneCommand(Line line)
+        public AddThrowCommand(Line line)
         {
             this.line = line;
         }
 
         public bool CanExecute(object? parameter)
         {
-            throw new NotImplementedException();
+            return parameter is Throw;
         }
 
         public void Execute(object? parameter)
         {
-            line.Add(Throw.One);
+            try
+            {
+                line.Add((Throw)parameter);
+            }
+            catch (Exception ex)
+            {
+                throw new ArgumentException(ex.Message, nameof(parameter), ex);
+            }
         }
 
         public event EventHandler? CanExecuteChanged;

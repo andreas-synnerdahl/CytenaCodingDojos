@@ -20,7 +20,7 @@ namespace BowlingAppViewModel
 
         public void Execute(object? parameter)
         {
-            _line[_line.Count] = Throw.Miss;
+            _line.Add(Throw.Miss);
         }
 
         public event EventHandler? CanExecuteChanged;

@@ -9,16 +9,13 @@ namespace BowlingAppViewModel
 
         public BowlingAppViewModel()
         {
-            AddMissCommand = new AddMissCommand(_line);
-            AddMissCommand = new AdOneCommand(_line);
+            AddThrowCommand = new AddThrowCommand(_line);            
         }
 
-        public ICommand AddMissCommand { get; set; }
-        public ICommand AddOneCommand { get; set; }
+        public ICommand AddThrowCommand { get; set; }
 
-        public int ThrowCount
-        {
-            get => _line.Count;
-        }
+        public int ThrowCount => _line.Count;
+
+        public Throw this[int index] => _line[index];
     }
 }

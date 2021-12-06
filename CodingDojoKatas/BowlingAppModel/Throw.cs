@@ -13,6 +13,6 @@
         Eight = 8,
         Nine = 9,
         Strike = 10,
-        Spare = 11,
+        Ten = 10,
     }
 }
